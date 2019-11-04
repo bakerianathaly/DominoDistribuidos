@@ -18,55 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getLocalStorage()
   }
-
-  // ngOnInit() {
-  //   this.peopleDinner()
-  //   this.hourDinner()
-  //   this.getLocalStorage()
-
-  //   var date = this.actualDate()
-  //   this.formGroup = new FormGroup({
-  //     cantidadPersonas: new FormControl(-1, [
-  //       Validators.required
-  //     ]),
-  //     fechaReserva: new FormControl(null, [
-  //       Validators.required
-  //     ]),
-  //     horaReserva: new FormControl(-1, [
-  //       Validators.required
-  //     ]),
-  //     pais: new FormControl(-1, [
-  //       Validators.required
-  //     ]),
-  //     ciudad: new FormControl(-1, [
-  //       Validators.required
-  //     ])
-  //   })
-  //   document.getElementById("reserva").setAttribute("min", date);
-  // }
-
-  // public onSubmit() {
-  //   if(this.formGroup.get('horaReserva').value != -1 && this.formGroup.get('ciudad').value != -1 && 
-  //     this.formGroup.get('pais').value != -1 && this.formGroup.get('cantidadPersonas').value != -1 && 
-  //     this.formGroup.get('fechaReserva').valid){
-      
-  //     var datosReserva ={
-  //       userID:this.userId,
-  //       timeStamp: this.formGroup.get('fechaReserva').value+' '+this.formGroup.get('horaReserva').value,
-  //       cantPeople: this.formGroup.get('cantidadPersonas').value,
-  //       ciudad:this.formGroup.get('ciudad').value
-  //     }
-  //     this.localStorage.setItem('formReserva', datosReserva).subscribe(datosReserva =>{
-        
-  //       this.router.navigate(['restaurant-reservation/list-restaurant']);
-  //     })
-      
-  //   }
-  //   else{
-  //     this.subM =true
-  //   }
-  // }
-
   public getLocalStorage(){
     this.localStorage.getItem('id').subscribe(storedId =>{
       if(storedId){
@@ -82,5 +33,9 @@ export class HomeComponent implements OnInit {
 
   public unirsePartida(): void{
     this._router.navigate(['/unirse']);
+  }
+
+  public partidas(): void{
+    this._router.navigate(['/totalPartidas'])
   }
 }

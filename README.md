@@ -31,3 +31,11 @@ POST /itsMyTurn: Es lo que seria el juego como tal, lo que hace es que lee ve qu
     }
 
 NOTA: /itsMyTurn SOLAMENTE cambia el turno y agrega la ficha al array, actualmente no valida nada del juego de domino como tal
+
+Cosas que faltan por hacerle:
+
+1. Que haga bien las jugadas con las fichas
+2. Que muestre el historial de las jugadas en la tabla de todas las partidas
+3. Actualizar automatico
+4. Mostrar las fichas
+5. Mostrar simultaneamente el que tiene 2 partidas sus partidas

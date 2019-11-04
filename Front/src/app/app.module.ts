@@ -6,7 +6,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OnepageComponent } from './onepage/onepage.component';
 import { HomeComponent } from './home/home.component';
 import { UnirseComponent } from './unirse/unirse.component';
 import { CrearComponent } from './crear/crear.component';
@@ -16,7 +15,6 @@ import { TotalPartidasComponent } from './total-partidas/total-partidas.componen
 @NgModule({
   declarations: [
     AppComponent,
-    OnepageComponent,
     HomeComponent,
     UnirseComponent,
     CrearComponent,

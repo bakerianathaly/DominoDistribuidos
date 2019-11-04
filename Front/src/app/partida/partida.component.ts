@@ -89,7 +89,7 @@ export class PartidaComponent implements OnInit {
   }
 
   public partidas(){
-    this._router.navigate(['/totalPartidas'])
+    this._router.navigate(['/partidas'])
   }
 
 }

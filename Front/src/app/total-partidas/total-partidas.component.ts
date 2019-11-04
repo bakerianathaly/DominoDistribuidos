@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-total-partidas',
@@ -10,6 +11,7 @@ export class TotalPartidasComponent implements OnInit {
 
   public juego: any[] = []
   constructor(
+    private _router: Router,
     private http: HttpClient
   ) { }
 
@@ -29,4 +31,7 @@ export class TotalPartidasComponent implements OnInit {
     })
   }
 
+  public regresar(){
+    this._router.navigate(['/'])
+  }
 }
