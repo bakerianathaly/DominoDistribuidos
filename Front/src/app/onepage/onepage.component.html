@@ -1,0 +1,55 @@
+<div class="text-align-center">
+  <table>
+    <tr>
+      <td>Nombre </td>
+      <td>Cantidad de jugadores</td>
+      <td>estatus</td>
+      <td>Ganador</td>
+    </tr>
+    <tr *ngFor="let item of momo">
+      <td>{{item.nombre}}</td>
+      <td style="text-align: center; ">{{item.cantidadJugadores.length}}</td>
+      <td>{{item.estatus}}</td>
+      <td style="text-align: center; ">{{item.ganador}}</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <h3>Historial de jugadas {{momo3}}</h3>
+  <table>
+
+    <tr *ngFor="let item of momo2">
+      <td>{{item}}</td>
+    </tr>
+  </table>
+</div>
+
+<button (click)="cambiarPartida()">Restar</button> -->
+
+<button (click)="unirsePartida()">pepito</button>
+
+<div class="alert alert-primary" role="alert">
+  A simple primary alert—check it out!
+</div>
+<div class="alert alert-secondary" role="alert">
+  A simple secondary alert—check it out!
+</div>
+<div class="alert alert-success" role="alert">
+  A simple success alert—check it out!
+</div>
+<div class="alert alert-danger" role="alert">
+  A simple danger alert—check it out!
+</div>
+<div class="alert alert-warning" role="alert">
+  A simple warning alert—check it out!
+</div>
+<div class="alert alert-info" role="alert">
+  A simple info alert—check it out!
+</div>
+<div class="alert alert-light" role="alert">
+  A simple light alert—check it out!
+</div>
+<div class="alert alert-dark" role="alert">
+  A simple dark alert—check it out!
+</div>
