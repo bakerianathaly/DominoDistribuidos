@@ -42,7 +42,7 @@ export class UnirseComponent implements OnInit {
             this.partidas.push(datos)
           }
         }
-    });
+    })
   }
 
   public onSubmit(){
@@ -58,20 +58,28 @@ export class UnirseComponent implements OnInit {
             this._router.navigate(['/'])
           }
           else{
+            var datos
             for(let i=0; i<response.length; i++){
               if(response[i].nombrePartida == this.formGroup.get('partida').value){
-                var datos={
-                  "nombrePartida": response[i].nombrePartida,
-                  "jugadoresPartida": response[i].jugadoresPartida,
-                  "estatus": response[i].estatus,
-                  "turno": response[i].turno,
-                  "ficha": response[i].ficha
+                for(let j=0; j<2; j++){
+                  if(response[i].jugadoresPartida[j] == this.formGroup.get('usuario').value){
+                    datos={
+                      "nombrePartida": response[i].nombrePartida,
+                      "jugadoresPartida": response[i].jugadoresPartida[j],
+                      "estatus": response[i].estatus,
+                      "turno": response[i].turno,
+                      "ficha": response[i].ficha
+                    }
+                    console.log(datos)
+                    i=100
+                    j=30
+                  }
                 }
-                console.log(datos)
-                i=1000
               }
             }
-            this._router.navigate(['/partida'])
+            this.localStorage.setItem('usuario', datos).subscribe(datos =>{
+              this._router.navigate(['/partida'])
+            })
           }
         })
       }

@@ -1,1 +1,50 @@
-<p>partida works!</p>
+<div id="contenedor" class="container">
+        <div class="text-center">
+                <div class="m-2">
+                    <div>
+                        <h2>Bienvenidos a DominoDistribuido</h2>
+                    </div>
+                    <div>
+                        <h5>Un partidita de Domino entre panas</h5>
+                    </div>
+                </div>
+                <br><br>
+                <div>
+                    <h6>Partida actual</h6>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Nombre partida </th>
+                                <th>Cantidad de jugadores</th>
+                                <th>Jugadores en partida</th>
+                                <th>Estatus</th>
+                                <th>Turno</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let game of juego">
+                                <td>{{game.nombrePartida}}</td>
+                                <td >{{game.cantidadJugadores}}</td>
+                                <td>{{game.jugadores}}</td>
+                                <td>{{game.estatus}}</td>
+                                <td>{{game.turno}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br><br><br>
+                <div class="justify-content-md-center">
+                    <form [formGroup]="formGroup">
+                        <div class="form-group mt-5">
+                            <label for="jugada">Jugada maestra</label>
+                            <input type="text" class="form-control" id="jugada" formControlName="jugada" placeholder="Escriba su jugada">
+                            <small class="form-text text-muted">Ejemplo: 3:1.</small>
+                        </div>
+                        <button id="botonB" type="submit" class="btn btn-warning" (click)="onSubmit()">Jugar!</button>
+                        <button id="botonA" type="submit" class="btn btn-primary" (click)="actualizar()">Actualizar Juego!</button>
+                        <button id="botonA" type="submit" class="btn btn-danger" (click)="otraPartida()">Unirme otro Juego!</button>
+                        <button id="botonA" type="submit" class="btn btn-info" (click)="partidas()">Todas las partidas!</button>
+                    </form>
+                </div>
+        </div>
+    </div>

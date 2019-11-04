@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { UnirseComponent } from './unirse/unirse.component';
 import { CrearComponent } from './crear/crear.component';
 import { PartidaComponent } from './partida/partida.component';
+import { TotalPartidasComponent } from './total-partidas/total-partidas.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PartidaComponent } from './partida/partida.component';
     HomeComponent,
     UnirseComponent,
     CrearComponent,
-    PartidaComponent
+    PartidaComponent,
+    TotalPartidasComponent
   ],
   imports: [
     BrowserModule,

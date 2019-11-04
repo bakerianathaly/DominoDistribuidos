@@ -35,6 +35,13 @@ export class CrearComponent implements OnInit {
       if(this.formGroup.get('partida').value != ""){
         var datos={
           "nombrePartida": this.formGroup.get('partida').value,
+          "jugadoresPartida": this.formGroup.get('usuario').value,
+          "estatus": "esperando",
+          "turno": "",
+          "ficha": []
+        }
+        var datos2={
+          "nombrePartida": this.formGroup.get('partida').value,
           "jugadoresPartida": [this.formGroup.get('usuario').value],
           "estatus": "esperando",
           "turno": "",
@@ -42,7 +49,7 @@ export class CrearComponent implements OnInit {
         }
         //Guardo en el localsotrage la partida a la cual me estoy uniendo en la llame "usuario"
         this.localStorage.setItem('usuario', datos).subscribe(datos =>{
-          this.http.post("http://localhost:3003/gameInit", datos).subscribe((response: any) => {
+          this.http.post("http://localhost:3003/gameInit", datos2).subscribe((response: any) => {
             console.log(response);
             if (response.error == "No pueden haber mas de dos partidas creadas"){
               this._router.navigate(['/'])

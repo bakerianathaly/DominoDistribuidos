@@ -173,7 +173,10 @@ domino.post('/itsMyTurn', async (req, res) => {
                console.log('error::: ' + err)
           })
      }
-     res.send(siguienteTurno)
+     let siguiente ={
+          "turno":siguienteTurno
+     }
+     res.send(siguiente)
 })
 
 domino.listen(3003, () => {
