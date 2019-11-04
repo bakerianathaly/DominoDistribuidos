@@ -1,4 +1,16 @@
-<div class="tect-aling-center">
-    <p>Home!!!</p>
-    <button class="btn btn-danger" (click)="cambiarRuta()"></button>
+<div id="contenedor" class="container-fluid">
+    <div class="text-center">
+            <div class="m-2">
+                <div>
+                    <h2>Bienvenidos a DominoDistribuido</h2>
+                </div>
+                <div>
+                    <h5>Por favor selecciona una opcion</h5>
+                </div>
+            </div>
+        <button id="botonB" type="button" class="btn btn-warning" (click) = "crerPartida()">Crear Partida</button>
+        <button id="botonA" type="button" class="btn btn-primary" (click)= "unirsePartida()">Unirse Partida</button>
+        <button id="botonA" type="submit" class="btn btn-info" (click)="partidas()">Todas las partidas!</button>
+
+    </div>
 </div>

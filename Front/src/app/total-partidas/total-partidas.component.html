@@ -1,0 +1,37 @@
+<div id="contenedor" class="container">
+    <div class="text-center">
+        <div class="m-2">
+        <div>
+            <h2>Bienvenidos a DominoDistribuido</h2>
+        </div>
+        <div>
+            <h5>Las partiditas actuales de los panas</h5>
+        </div>
+        </div>
+        <br><br>
+        <div>
+            <h6>Partidas</h6>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre partida </th>
+                        <th>Cantidad de jugadores</th>
+                        <th>Jugadores en partida</th>
+                        <th>Estatus</th>
+                        <th>Turno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let game of juego">
+                        <td>{{game.nombrePartida}}</td>
+                        <td >{{game.cantidadJugadores}}</td>
+                        <td>{{game.jugadores}}</td>
+                        <td>{{game.estatus}}</td>
+                        <td>{{game.turno}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-danger" (click) = "regresar()">Home!</button>
+        </div>
+    </div>
+</div>

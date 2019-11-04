@@ -6,20 +6,6 @@ const domino = express();
 domino.use(bodyParser.urlencoded({ extended: false }));
 domino.use(bodyParser.json());
 
-//Ejemplo del JSON para el juego
-// var juego = [{
-//      nombrePartida: '',
-//      juagadoresPartida: [],
-//      estatus: 'vacia',
-//      turno: ''
-// },
-// {
-//      nombrePartida: '',
-//      juagadoresPartida: [],
-//      estatus: 'vacia',
-//      turno: ''
-// }]
-
 //Arreglo de las ip y puertos de las otras maquinas del proyecto
 var remotos = ["192.168.1.4:3001","192.168.1.8:3002","localhost:3003"] //"algo:3002"]
 
@@ -173,7 +159,10 @@ domino.post('/itsMyTurn', async (req, res) => {
                console.log('error::: ' + err)
           })
      }
-     res.send(siguienteTurno)
+     let siguiente ={
+          "turno":siguienteTurno
+     }
+     res.send(siguiente)
 })
 
 domino.listen(3003, () => {

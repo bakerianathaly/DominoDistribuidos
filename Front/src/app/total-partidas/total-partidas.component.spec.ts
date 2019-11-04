@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OnepageComponent } from './onepage.component';
+import { TotalPartidasComponent } from './total-partidas.component';
 
-describe('OnepageComponent', () => {
-  let component: OnepageComponent;
-  let fixture: ComponentFixture<OnepageComponent>;
+describe('TotalPartidasComponent', () => {
+  let component: TotalPartidasComponent;
+  let fixture: ComponentFixture<TotalPartidasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OnepageComponent ]
+      declarations: [ TotalPartidasComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OnepageComponent);
+    fixture = TestBed.createComponent(TotalPartidasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
