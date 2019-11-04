@@ -3,11 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component'
 import { HomeComponent } from './home/home.component'
 import { OnepageComponent } from './onepage/onepage.component'
+import { UnirseComponent } from './unirse/unirse.component'
+import { CrearComponent } from './crear/crear.component'
+import { PartidaComponent } from './partida/partida.component'
 
 
 const routes: Routes = [
-  {path:'', component: AppComponent},
-  {path:'home', component: HomeComponent},
+  {path:'', component: HomeComponent},
+  {path:'unirse', component:UnirseComponent},
+  {path:'crear', component:CrearComponent},
+  {path:'partida', component: PartidaComponent},
   {path: 'onePage', component: OnepageComponent}
 ];
 
