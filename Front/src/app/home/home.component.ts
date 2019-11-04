@@ -18,9 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getLocalStorage()
   }
-  public cambiarRuta(): void{
-    this._router.navigate(['/onePage']);
-  }
 
   // ngOnInit() {
   //   this.peopleDinner()
@@ -77,5 +74,13 @@ export class HomeComponent implements OnInit {
         this.userId = storedId
       }
     })
+  }
+
+  public crerPartida(): void{
+    this._router.navigate(['/crear']);
+  }
+
+  public unirsePartida(): void{
+    this._router.navigate(['/unirse']);
   }
 }

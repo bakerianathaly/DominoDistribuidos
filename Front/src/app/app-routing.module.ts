@@ -7,7 +7,6 @@ import { UnirseComponent } from './unirse/unirse.component'
 import { CrearComponent } from './crear/crear.component'
 import { PartidaComponent } from './partida/partida.component'
 
-
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'unirse', component:UnirseComponent},

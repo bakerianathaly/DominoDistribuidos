@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http'
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -26,7 +26,8 @@ import { PartidaComponent } from './partida/partida.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

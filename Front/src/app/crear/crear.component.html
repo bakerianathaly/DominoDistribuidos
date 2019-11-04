@@ -1,1 +1,26 @@
-<p>crear works!</p>
+<div id="contenedor" class="container">
+        <div class="text-center">
+                <div class="m-2">
+                    <div>
+                        <h2>Bienvenidos a DominoDistribuido</h2>
+                    </div>
+                    <div>
+                        <h5>Crear partida de domino</h5>
+                    </div>
+                </div>
+                <div class="justify-content-md-center">
+                    <form [formGroup]="formGroup">
+                        <div class="form-group mt-5">
+                            <label for="usuario">Nombre de usuario para el juego</label>
+                            <input type="text" class="form-control" id="usuario" formControlName="usuario" placeholder="Colocar nombre de usuario">
+                            <small class="form-text text-muted">Se creativo.</small>
+                        </div>
+                        <div class="form-group mt-5">
+                            <label for="partida">Nombre para la partida</label>
+                            <input type="text" class="form-control" id="partida" formControlName="partida" placeholder="Colocar nombre la partida">
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                    </form>
+                </div>
+        </div>
+    </div>
