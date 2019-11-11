@@ -7,10 +7,19 @@ domino.use(bodyParser.urlencoded({ extended: false }));
 domino.use(bodyParser.json());
 
 //Arreglo de las ip y puertos de las otras maquinas del proyecto
-var remotos = ["192.168.1.4:3001","192.168.1.8:3002","localhost:3003"] //"algo:3002"]
-
+var remotos = ["localhost:3003"] //"algo:3002"] "192.168.43.217:3001","192.168.43.9:3002",
+var usuario = ''
 //Arreglo que de JSON que tendra todas las partidas con sus jugadores y jugadas
 var juego = []
+
+domino.post('/user', (req,res)=>{
+     usuario = req.body
+     res.send(usuario)
+})
+
+domino.get('/getUser', (req,res)=>{
+     res.send(usuario)
+})
 
 domino.get('/game', (req, res)=> {
      res.send(juego)

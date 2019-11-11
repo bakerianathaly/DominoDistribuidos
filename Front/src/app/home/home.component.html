@@ -8,9 +8,17 @@
                     <h5>Por favor selecciona una opcion</h5>
                 </div>
             </div>
-        <button id="botonB" type="button" class="btn btn-warning" (click) = "crerPartida()">Crear Partida</button>
-        <button id="botonA" type="button" class="btn btn-primary" (click)= "unirsePartida()">Unirse Partida</button>
-        <button id="botonA" type="submit" class="btn btn-info" (click)="partidas()">Todas las partidas!</button>
+        <form [formGroup]="formGroup" *ngIf ="user ==  ''">
+            <div class="form-group mt-5">
+                <label for="usuario">Nombre de usuario</label>
+                <input type="text" class="form-control" id="usuario" formControlName="usuario" placeholder="Colocar nombre de usuario">
+                <small class="form-text text-muted">Se creativo.</small>
+            </div>
+            <button *ngIf ="user ==  ''" id="botonB" type="button" class="btn btn-warning" (click) = "postUser()">Agregar usuario</button>
+        </form>
+        <button *ngIf ="user !=  ''" id="botonB" type="button" class="btn btn-warning" (click) = "crerPartida()">Crear Partida</button>
+        <button *ngIf ="user !=  ''" id="botonA" type="button" class="btn btn-primary" (click)= "unirsePartida()">Unirse Partida</button>
+        <button *ngIf ="user !=  ''" id="botonA" type="submit" class="btn btn-info" (click)="partidas()">Todas las partidas!</button>
 
     </div>
 </div>
