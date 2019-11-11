@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { interval, Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-partida',
@@ -16,6 +17,9 @@ export class PartidaComponent implements OnInit {
   public partida = ''
   public formGroup: FormGroup
   public turno = ''
+  subscription: Subscription
+  jugador: String
+  jugadorActual: String
   constructor(
     private _router: Router,
     private localStorage: LocalStorageService,
@@ -29,6 +33,7 @@ export class PartidaComponent implements OnInit {
         Validators.required
       ])
     })
+    this.actualizacion()
   }
 
   ngOnDestroy(){
@@ -58,9 +63,15 @@ export class PartidaComponent implements OnInit {
             cantidadJugadores:response[i].jugadoresPartida.length,
             jugadores: response[i].jugadoresPartida,
             estatus: "Jugando ando",
-            turno: response[i].turno              
+            turno: response[i].turno,
+            ficha: response[i].ficha[i]             
           }
-          this.juego.push(datos)
+          console.log(datos)
+          this.jugador = datos["turno"]
+          if(this.jugador != this.jugadorActual){
+            this.juego.push(datos)
+            this.jugadorActual = datos["turno"]
+          }
         }
       }
     })
@@ -70,7 +81,16 @@ export class PartidaComponent implements OnInit {
     this.localStorage.removeItem('usuario')
   }
 
-  public onSubmit(){
+  actualizacion(){
+    const source = interval(2500)
+    this.subscription=source.subscribe(val => this.actualizarPantalla())
+  }
+
+  actualizarPantalla(){
+    this.actualizar();
+  }
+
+  async onSubmit(){
     if(this.formGroup.get('jugada').value != ""){
       let jugada = {
         nombrePartida:this.partida,
@@ -78,9 +98,10 @@ export class PartidaComponent implements OnInit {
         ficha: this.formGroup.get('jugada').value
       }
 
-      this.http.post("http://localhost:3003/itsMyTurn", jugada).subscribe((response: any) => {
-        this.actualizar()
+      await this.http.post("http://localhost:3003/itsMyTurn", jugada).subscribe((response: any) => {
+        
       })
+      this.actualizar()
     }
   }
 
@@ -89,7 +110,7 @@ export class PartidaComponent implements OnInit {
   }
 
   public partidas(){
-    this._router.navigate(['/partidas'])
+    this._router.navigate(['/totalPartidas'])
   }
 
 }

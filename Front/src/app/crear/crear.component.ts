@@ -12,6 +12,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 export class CrearComponent implements OnInit {
 
   public formGroup: FormGroup
+  user: String = ''
   constructor(
     private _router: Router,
     private localStorage: LocalStorageService,
@@ -28,21 +29,25 @@ export class CrearComponent implements OnInit {
         Validators.required
       ])
     })
+
+    this.http.get("http://localhost:3003/getUser").subscribe((response: any)=>{
+      this.user = response
+    })
   }
 
   public onSubmit(){
-    if(this.formGroup.get('usuario').value != ""){
+    if(this.user != ""){
       if(this.formGroup.get('partida').value != ""){
         var datos={
           "nombrePartida": this.formGroup.get('partida').value,
-          "jugadoresPartida": this.formGroup.get('usuario').value,
+          "jugadoresPartida": this.user,
           "estatus": "esperando",
           "turno": "",
           "ficha": []
         }
         var datos2={
           "nombrePartida": this.formGroup.get('partida').value,
-          "jugadoresPartida": [this.formGroup.get('usuario').value],
+          "jugadoresPartida": [this.user['usuario']],
           "estatus": "esperando",
           "turno": "",
           "ficha": []

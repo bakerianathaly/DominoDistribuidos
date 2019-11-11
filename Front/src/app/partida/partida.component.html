@@ -19,6 +19,7 @@
                                 <th>Jugadores en partida</th>
                                 <th>Estatus</th>
                                 <th>Turno</th>
+                                <th>Jugada</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,6 +29,7 @@
                                 <td>{{game.jugadores}}</td>
                                 <td>{{game.estatus}}</td>
                                 <td>{{game.turno}}</td>
+                                <td>{{game.ficha}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -41,7 +43,7 @@
                             <small class="form-text text-muted">Ejemplo: 3:1.</small>
                         </div>
                         <button id="botonB" type="submit" class="btn btn-warning" (click)="onSubmit()">Jugar!</button>
-                        <button id="botonA" type="submit" class="btn btn-primary" (click)="actualizar()">Actualizar Juego!</button>
+                        <!-- <button id="botonA" type="submit" class="btn btn-primary" (click)="actualizar()">Actualizar Juego!</button> -->
                         <button id="botonA" type="submit" class="btn btn-danger" (click)="otraPartida()">Unirme otro Juego!</button>
                         <button id="botonA" type="submit" class="btn btn-info" (click)="partidas()">Todas las partidas!</button>
                     </form>
