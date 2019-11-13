@@ -1,0 +1,29 @@
+<div id="contenedor" class="container-fluid">
+    <br><br><br><br>
+    <div class="text-center">
+        <div class="m-2">
+            <div>
+                <h2>Bienvenidos a DominoDistribuido</h2>
+            </div>
+        </div>
+        <div *ngIf = "nombreUsuario == ''">
+                <h5>Por favor selecciona una opcion</h5>
+        </div>
+        <form [formGroup]="formGroup" *ngIf ="nombreUsuario ==  ''">
+            <div class="form-group mt-5">
+                <label for="usuario">Nombre de usuario</label>
+                <input type="text" class="form-control " id="usuario" formControlName="usuario" placeholder="Colocar nombre de usuario">
+                <small class="form-text text-muted">Se creativo.</small>
+            </div>
+            <button *ngIf ="nombreUsuario ==  ''" id="botonB" type="button" class="btn btn-warning" (click) = "postNombreUsuraio()">Agregar usuario</button>
+        </form>
+        <div *ngIf ="nombreUsuario != ''">
+            <h5>Por favor {{nombreUsuario}} selecciona una opcion</h5>
+        </div>
+        <br><br><br><br>
+        <button *ngIf ="nombreUsuario !=  ''" id="botonB" type="button" class="btn btn-warning mr-2" (click) = "crearPartida()">Crear Partida</button>
+        <button *ngIf ="nombreUsuario !=  ''" id="botonA" type="button" class="btn btn-primary mr-2 ml-2" (click)= "unirsePartida()">Unirse Partida</button>
+        <button *ngIf ="nombreUsuario !=  ''" id="botonA" type="submit" class="btn btn-info ml-2" (click)="partidas()">Todas las partidas!</button>
+
+    </div>
+</div>

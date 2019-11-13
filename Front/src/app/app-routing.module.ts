@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component'
-import { HomeComponent } from './home/home.component'
-import { UnirseComponent } from './unirse/unirse.component'
-import { CrearComponent } from './crear/crear.component'
-import { PartidaComponent } from './partida/partida.component'
-import { TotalPartidasComponent } from './total-partidas/total-partidas.component'
+import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component'
+import { CrearPartidaComponent } from './crear-partida/crear-partida.component'
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
-  {path:'unirse', component:UnirseComponent},
-  {path:'crear', component:CrearComponent},
-  {path:'partida', component: PartidaComponent},
-  {path: 'totalPartidas' ,component: TotalPartidasComponent}
+  {path:'', component: RegistroUsuarioComponent},
+  {path: 'crearPartida', component: CrearPartidaComponent}
 ];
 
 @NgModule({

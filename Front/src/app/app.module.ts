@@ -6,20 +6,14 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { UnirseComponent } from './unirse/unirse.component';
-import { CrearComponent } from './crear/crear.component';
-import { PartidaComponent } from './partida/partida.component';
-import { TotalPartidasComponent } from './total-partidas/total-partidas.component';
+import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
+import { CrearPartidaComponent } from './crear-partida/crear-partida.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    UnirseComponent,
-    CrearComponent,
-    PartidaComponent,
-    TotalPartidasComponent
+    RegistroUsuarioComponent,
+    CrearPartidaComponent
   ],
   imports: [
     BrowserModule,
