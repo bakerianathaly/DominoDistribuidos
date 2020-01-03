@@ -6,8 +6,6 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
-
 var PIEZAS = {
      1: '0:0',
      2: '0:1',
