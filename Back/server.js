@@ -1,170 +1,357 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require("request-promise");
-const domino = express();
+const app = express();
 
-domino.use(bodyParser.urlencoded({ extended: false }));
-domino.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-//Arreglo de las ip y puertos de las otras maquinas del proyecto
-var remotos = ["192.168.1.4:3001","192.168.1.8:3002","localhost:3003"] //"algo:3002"]
 
-//Arreglo que de JSON que tendra todas las partidas con sus jugadores y jugadas
-var juego = []
 
-domino.get('/game', (req, res)=> {
-     res.send(juego)
-})
+var PIEZAS = {
+     1: '0:0',
+     2: '0:1',
+     3: '0:2',
+     4: '0:3',
+     5: '0:4',
+     6: '0:5',
+     7: '0:6',
+     8: '1:1',
+     9: '1:2',
+     10: '1:3',
+     11: '1:4',
+     12: '1:5',
+     13: '1:6',
+     14: '2:2',
+     15: '2:3',
+     16: '2:4',
+     17: '2:5',
+     18: '2:6',
+     19: '3:3',
+     20: '3:4',
+     21: '3:5',
+     22: '3:6',
+     23: '4:4',
+     24: '4:5',
+     25: '4:6',
+     26: '5:5',
+     27: '5:6',
+     28: '6:6',
+};
 
-domino.post('/update', (req, res)=> {
-     //Actualiza las partidas que ya han sido creadas
-     juego = req.body
-     res.send(juego)
-})
+var PIEZAS2 = {
+     1: '0:0',
+     2: '0:1',
+     3: '0:2',
+     4: '0:3',
+     5: '0:4',
+     6: '0:5',
+     7: '0:6',
+     8: '1:1',
+     9: '1:2',
+     10: '1:3',
+     11: '1:4',
+     12: '1:5',
+     13: '1:6',
+     14: '2:2',
+     15: '2:3',
+     16: '2:4',
+     17: '2:5',
+     18: '2:6',
+     19: '3:3',
+     20: '3:4',
+     21: '3:5',
+     22: '3:6',
+     23: '4:4',
+     24: '4:5',
+     25: '4:6',
+     26: '5:5',
+     27: '5:6',
+     28: '6:6',
+};
 
-domino.post('/updateGame', (req, res)=> {
-     //Actualiza las partidas cuando se crea una nueva
-     if(juego.length != 2){
-          juego.push(req.body)
-          res.send(juego)
-     }
-     else{
-          var error = {
-               'error': "No pueden haber mas de dos partidas creadas"
+
+var computadoras_conectadas = ['localhost:3000', '192.168.0.100:3000', '192.168.0.104:3000']
+//var computadoras_conectadas = ['mysterious-refuge-76786.herokuapp.com', 'immense-taiga-70290.herokuapp.com', 'dry-journey-36889.herokuapp.com']
+
+// var partida = [{
+//      nombre: 'partida1',
+//      cantidadJugadores: ['jugador1'],
+//      estatus: 'esperando',
+//      ganador: 'N/A',
+//      fichasJugador1: [],
+//      fichasJugador2: [],
+//      HistorialDejugadas: ['jugador 1 ->  0:0', 'jugador 2 -> 0:1'],
+//      turnoDeJugador: ''
+// },
+// {
+//      nombre: 'partida2',
+//      cantidadJugadores: ['jugador1'],
+//      estatus: 'esperando',
+//      ganador: 'N/A',
+//      fichasJugador1: [],
+//      fichasJugador2: [],
+//      HistorialDejugadas: [],
+//      turnoDeJugador: ''
+// }]
+const fs = require('fs');
+var partida = [];
+
+app.get('/Partidas', function (req, res) {
+     console.log(partida)
+     res.send(partida);
+});
+
+app.post('/Actualizar', function (req, res) {
+     partida = req.body;
+     fs.unlink('salvar.json', (err) => {
+          if (err) {
+               throw err;
+          } else {
+               console.log('Archivo Eliminado Satisfactoriamente');
+               fs.appendFile('salvar.json', JSON.stringify(partida), (err) => {
+                    if (err) throw err;
+                    console.log('Archivo Creado Satisfactoriamente');
+               });
           }
-          res.send(error)
-     }
-})
+     });
 
-domino.post('/joinGame', async (req, res) => {
+     console.log('actualizado');
+     res.send(partida);
+});
 
-     let partida = req.body.nombrePartida
-     let jugadorPartida = req.body.jugador
+app.post('/Jugada', async (req, res) => {
+     var partidaNombre = req.body.partidaNombre;
+     var jugador = req.body.jugador;
+     var jugada = req.body.jugada;
 
-     for (let i = 0; i < 2; i++) {
-          if (juego[i].nombrePartida == partida) {
-               if(juego[i].jugadoresPartida.length == 1){
-                    juego[i].jugadoresPartida.push(jugadorPartida)
-                    juego[i].estatus = 'jugando'
-                    juego[i].turno = jugadorPartida
-                    i = 3
-               }
-               else{
-                    var error = {
-                         'error': "No pueden haber mas de dos jugadores por partida!!!"
+     for (let index = 0; index < partida.length; index++) {
+          console.log(partida[index].nombre.localeCompare(partidaNombre));
+          if (partida[index].nombre == partidaNombre) {
+               if (partida[index].turnoDeJugador == jugador) {
+                    for (let index2 = 0; index2 < partida[index].fichasJugador1.length; index2++) {
+                         if (partida[index].fichasJugador1[index2] == jugada) {
+                              partida[index].fichasJugador1[index2] = ''
+                              partida[index].HistorialDejugadas.push(jugador + ' --> ' + jugada);
+                              partida[index].turno = partida[index].cantidadJugadores[1];
+                              partida[index].turnoDeJugador = partida[index].cantidadJugadores[1];
+                         } else if (partida[index].fichasJugador2[index2] == jugada) {
+                              partida[index].fichasJugador2[index2] = ''
+                              partida[index].HistorialDejugadas.push(jugador + ' --> ' + jugada)
+                              partida[index].turno = partida[index].cantidadJugadores[0];
+                              partida[index].turnoDeJugador = partida[index].cantidadJugadores[0];
+
+                         }
+
                     }
-                    res.send(error)
                }
           }
      }
 
-     for (var i =0; i <= 2; i++ ){
-          console.log(remotos[i])
-          console.log(juego)
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
+
+
           let peticion = {
                method: "POST",
-               uri: "http://" + remotos[i]+ "/update",
+               uri: "http://" + ip + "/Actualizar",
                resolveWithFullResponse: true,
                json: true,
-               body: juego
+               body: partida
           };
 
           await request(peticion).then(() => {
 
-               console.log('Juego actualizado')
+               console.log('ACTUALIZE')
 
-          }).catch((err)=> {
+          }).catch(function (err) {
 
-               console.log('error::: ' + err)
+               console.log('error::: ' + err);
           })
      }
-     res.send(juego)
-})
 
-domino.post('/gameInit', async (req, res) => {
+     res.send(partida);
+});
 
-     let nuevaPartida = req.body;
 
-     //Validacion para saber la cantidad de partidas que hay, no pueden haber mas 2
-     if(juego.length !=2){
-          
-          for (var i =0; i <= 2; i++ ){
-               console.log(remotos[i])
-               let peticion = {
-                    method: "POST",
-                    uri: "http://" + remotos[i]+ "/updateGame",
-                    resolveWithFullResponse: true,
-                    json: true,
-                    body: nuevaPartida
+app.post('/Unirse', async (req, res) => {
+
+     var partidaNombre = req.body.partidaNombre;
+     var jugador = req.body.jugador;
+     console.log(jugador)
+     console.log(partidaNombre)
+
+     for (let index = 0; index < partida.length; index++) {
+
+          console.log(partida[index].nombre.localeCompare(partidaNombre));
+          if (partida[index].nombre == partidaNombre) {
+               console.log('--------------------');
+               partida[index].nombre = partidaNombre;
+               partida[index].cantidadJugadores.push(jugador);
+               partida[index].estatus = 'jugando';
+               partida[index].turnoDeJugador = jugador;
+               for (let i = 1; i < 14; i++) {
+                    partida[index].fichasJugador1.push(PIEZAS[i]);
                }
-
-               await request(peticion).then(() => {
-                    console.log('Juego actualizado')
-
-               }).catch((err)=> {
-                    console.log('error::: ' + err)
-               })
-          }
-          res.send(juego)
-     }
-     else{
-          var error = {
-               'error': "No pueden haber mas de dos partidas creadas"
-          }
-          res.send(error)
-     }
-})
-
-domino.post('/itsMyTurn', async (req, res) => {
-     var partidaNombre = req.body.nombrePartida
-     var jugador = req.body.jugador
-     var siguienteTurno = ''
-     var ficha = req.body.ficha
-
-     for (let i = 0; i < juego.length; i++) {
-          if(juego[i].nombrePartida == partidaNombre){
-               if(juego[i].turno == jugador){
-                    for(let j=0; j< 2; j++){
-                         if(juego[i].jugadoresPartida[j] == jugador){
-                              if (j == 0){
-                                   juego[i].turno = juego[i].jugadoresPartida[1]
-                                   siguienteTurno = juego[i].jugadoresPartida[1]
-                                   juego[i].ficha[0] = ficha
-                              }
-                              else{
-                                   juego[i].turno = juego[i].jugadoresPartida[0]
-                                   siguienteTurno = juego[i].jugadoresPartida[0]
-                                   juego[i].ficha[1] = ficha
-                              }
-                         }
-                    }
+               for (let j = 14; j < 28; j++) {
+                    partida[index].fichasJugador2.push(PIEZAS2[j])
                }
           }
      }
 
-     for (var i =0; i <= 2; i++ ){
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
+
 
           let peticion = {
                method: "POST",
-               uri: "http://" + remotos[i]+ "/update",
+               uri: "http://" + ip + "/Actualizar",
                resolveWithFullResponse: true,
                json: true,
-               body: juego
-          }
+               body: partida
+          };
 
           await request(peticion).then(() => {
-               console.log('Juego actualizado')
 
-          }).catch((err)=> {
-               console.log('error::: ' + err)
+               console.log('ACTUALIZE')
+
+          }).catch(function (err) {
+
+               console.log('error::: ' + err);
           })
      }
-     let siguiente ={
-          "turno":siguienteTurno
-     }
-     res.send(siguiente)
+
+     res.send(partida);
 })
 
-domino.listen(3003, () => {
-     console.log('Im on the port 3003, baby')
+app.post('/CrearPartida', async (req, res) => {
+
+     let peticion2 = req.body;
+     console.log(peticion2)
+     partida.push(peticion2);
+
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
+
+
+          let peticion = {
+               method: "POST",
+               uri: "http://" + ip + "/Actualizar",
+               resolveWithFullResponse: true,
+               json: true,
+               body: partida
+          };
+
+          await request(peticion).then(() => {
+
+               console.log('ACTUALIZE')
+
+          }).catch(function (err) {
+
+               console.log('error::: ' + err);
+          })
+     }
+     res.send(partida);
 })
+
+app.post('/turno', async (req, res) => {
+     var partidaNombre = req.body.partidaNombre;
+     var turno = '';
+     for (let index = 0; index < partida.length; index++) {
+          console.log(partida[index].nombre.localeCompare(partidaNombre));
+          if (partida[index].nombre == partidaNombre) {
+               console.log('-----------')
+               partida[index].turnoDeJugador;
+               res.send({ turno: partida[index].turnoDeJugador });
+          }
+     }
+
+});
+
+app.post('/fin', async (req, res) => {
+     var partidaNombre = req.body.partidaNombre;
+     var ganador = req.body.ganador;
+
+     for (let index = 0; index < partida.length; index++) {
+
+          if (partida[index].nombre == partidaNombre) {
+
+               partida[index].ganador = ganador;
+               partida[index].estatus = 'finaliazada';
+
+          }
+     }
+
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
+
+
+          let peticion = {
+               method: "POST",
+               uri: "http://" + ip + "/Actualizar",
+               resolveWithFullResponse: true,
+               json: true,
+               body: partida
+          };
+
+          await request(peticion).then(() => {
+
+               console.log('ACTUALIZE')
+
+          }).catch(function (err) {
+
+               console.log('error::: ' + err);
+          })
+     }
+     res.send(partida);
+});
+
+
+app.listen(process.env.PORT || 3000, async () => {
+
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
+
+
+          let peticion = {
+               method: "GET",
+               uri: "http://" + ip + "/Partidas",
+               resolveWithFullResponse: true,
+               json: true
+          };
+
+          await request(peticion).then((response) => {
+
+               console.log('ACTUALIZE: ' + JSON.stringify(response.body))
+               partida = response.body;
+
+
+
+          }).catch(function (err) {
+
+               console.log('error::: ' + err);
+          })
+     }
+     if (partida.length != 0) {
+          console.log('todo bien');
+
+          fs.appendFile('salvar.json', JSON.stringify(partida), (err) => {
+               if (err) throw err;
+               console.log('Archivo Creado Satisfactoriamente');
+          });
+
+          console.log(partida);
+     } else {
+          fs.readFile('salvar.json', (err, data) => {
+               if (err) {
+                    console.log('error: ', err);
+               } else {
+                    console.log('archivo cargado::' + data);
+                    partida = JSON.parse(data);
+               }
+          });
+     }
+
+
+     console.log('Escuchando peticiones en el puerto 3000');
+});
