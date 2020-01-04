@@ -69,8 +69,8 @@ var PIEZAS2 = {
 };
 
 
-var computadoras_conectadas = ['localhost:3000', '192.168.0.100:3000', '192.168.0.104:3000']
-//var computadoras_conectadas = ['mysterious-refuge-76786.herokuapp.com', 'immense-taiga-70290.herokuapp.com', 'dry-journey-36889.herokuapp.com']
+var remotos = ['localhost:3000']
+//var remotos = ['mysterious-refuge-76786.herokuapp.com', 'immense-taiga-70290.herokuapp.com', 'dry-journey-36889.herokuapp.com']
 
 // var partida = [{
 //      nombre: 'partida1',
@@ -146,8 +146,8 @@ app.post('/Jugada', async (req, res) => {
           }
      }
 
-     for (let index = 0; index < computadoras_conectadas.length; index++) {
-          let ip = computadoras_conectadas[index];
+     for (let index = 0; index < remotos.length; index++) {
+          let ip = remotos[index];
 
 
           let peticion = {
@@ -197,8 +197,8 @@ app.post('/Unirse', async (req, res) => {
           }
      }
 
-     for (let index = 0; index < computadoras_conectadas.length; index++) {
-          let ip = computadoras_conectadas[index];
+     for (let index = 0; index < remotos.length; index++) {
+          let ip = remotos[index];
 
 
           let peticion = {
@@ -228,8 +228,8 @@ app.post('/CrearPartida', async (req, res) => {
      console.log(peticion2)
      partida.push(peticion2);
 
-     for (let index = 0; index < computadoras_conectadas.length; index++) {
-          let ip = computadoras_conectadas[index];
+     for (let index = 0; index < remotos.length; index++) {
+          let ip = remotos[index];
 
 
           let peticion = {
@@ -280,8 +280,8 @@ app.post('/fin', async (req, res) => {
           }
      }
 
-     for (let index = 0; index < computadoras_conectadas.length; index++) {
-          let ip = computadoras_conectadas[index];
+     for (let index = 0; index < remotos.length; index++) {
+          let ip = remotos[index];
 
 
           let peticion = {
@@ -307,8 +307,8 @@ app.post('/fin', async (req, res) => {
 
 app.listen(process.env.PORT || 3000, async () => {
 
-     for (let index = 0; index < computadoras_conectadas.length; index++) {
-          let ip = computadoras_conectadas[index];
+     for (let index = 0; index < remotos.length; index++) {
+          let ip = remotos[index];
 
 
           let peticion = {

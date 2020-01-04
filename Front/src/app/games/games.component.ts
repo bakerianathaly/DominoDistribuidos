@@ -112,8 +112,4 @@ export class GamesComponent implements OnInit {
       console.log(response);
     });
   }
-
-  GetTurno() {
-  }
-
 }

@@ -4,10 +4,10 @@
   </label>
   <hr>
   <h3>Bienvenido, {{ this.nombreJugador }}</h3>
-    <br>
-  <div class="row" *ngIf = " this.nombreJugador != ''">`
-      <div class="col-md-8">
-        <div class=row>
+  <br>
+  <div class="row">
+    <div class="col-md-8">
+      <div class=row>
         <div class="col-md-6" *ngFor="let game of games">
           <mat-card>
               <mat-card-header>
@@ -41,58 +41,60 @@
               </div>
           </div>
       </div>
-          <input [(ngModel)]="this.jugada" type="text"><button type="submit" (click)="jugar()" class="boton">Jugar</button>   
-               
-      </div>
+      <div class="text-center ">
+        <input style="margin-right: 10px;" class="form-group" [(ngModel)]="this.jugada" type="text" placeholder="Jugada">
+        <button type="submit" (click)="jugar()" class="btn btn-danger">Jugar</button>  
+      </div>         
+    </div>
       
-      <div class="col-md-4">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <mat-card-title>Tablero de partidas</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>
-                    Partida    
-                  </th>
-                  <th>
-                    Cantidad Jugadores
-                  </th>
-                  <th>
-                    Status
-                  </th>
-                  <th>
-                    Ganador
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let game of games">
-                  <td>{{game.nombre}}</td>
-                  <td style="text-align: center; ">{{game.cantidadJugadores.length}}</td>
-                  <td>{{game.estatus}}</td>
-                  <td style="text-align: center; ">{{game.ganador}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </mat-card-content>
-          <button mat-button class="boton-derecha" (click)="JoinGame()">Unirme a Partida</button>
-          <mat-card-actions>
-            <button mat-button class="boton" (click)="GetTurno()">Actualizar</button>
+    <div class="col-md-4 text-center">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Todas las partidas!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table class="table">
+            <thead>
+              <tr>
+                  <th>Partida</th>
+                  <th>Jugadores</th>
+                  <th>Estatus</th>
+                  <th>Ganador</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let game of games">
+                <td>{{game.nombre}}</td>
+                <td style="text-align: center; ">{{game.cantidadJugadores.length}}</td>
+                <td>{{game.estatus}}</td>
+                <td style="text-align: center; ">{{game.ganador}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="btn btn-warning" (click)="JoinGame()">Unirme a Partida</button>
           </mat-card-actions>
-        </mat-card> 
+      </mat-card> 
         <br>
-        <label>Nombre de la partida:
-          <input [(ngModel)]="this.nombrePartida" placeholder="Nombre de la partida">
-        </label><hr>
-        <button mat-button class="boton" (click)="CreateGame()">Crear Partida</button>
+        <div class="text-aling-center">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>Crear Partida</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="this.nombrePartida" placeholder="Nombre de la partida">
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button class="btn btn-success" (click)="CreateGame()">Crear Partida</button>
+            </mat-card-actions>
+          </mat-card> 
+        </div>
       </div>
   </div>
-  {{ this.nombrePartida }}
+  <!-- {{ this.nombrePartida }}
   {{ this.nombreJugador }}
-  {{ this.turnoJugador }}
+  {{ this.turnoJugador }} -->
 </div>
 
 
