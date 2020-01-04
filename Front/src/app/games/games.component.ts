@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GameComponent } from '../game/game.component';
-
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-games',
@@ -43,7 +43,7 @@ export class GamesComponent implements OnInit {
   items2 = ''; 
   turno: boolean;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router: Router) {
     
   }
 
@@ -64,6 +64,9 @@ export class GamesComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    this.salir()
+  }
 
   CreateGame() {
     this.game.nombre = this.nombrePartida;
@@ -111,5 +114,15 @@ export class GamesComponent implements OnInit {
       } 
       console.log(response);
     });
+  }
+
+  salir(){
+    
+    localStorage.removeItem('nombreJugador')
+    localStorage.removeItem('nombrePartida')
+    localStorage.clear();
+    this.nombreJugador =''
+    this.nombrePartida = ''
+    this._router.navigate(['/'])
   }
 }

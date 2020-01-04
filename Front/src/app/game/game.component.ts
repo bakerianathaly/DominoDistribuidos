@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-game',
@@ -8,44 +9,43 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GameComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient, private _router: Router) { }
+  nombreJugador: string;
+  
   game = {
     nombre: '',
-    cantidadJugadores: ['jugador1'],
+    cantidadJugadores: [],
     estatus: 'esperando',
     ganador: 'N/A',
     fichasJugador1: [],
     fichasJugador2: [],
     HistorialDejugadas: [],
-    turnoDeJugador: 'Jugador1'
+    turnoDeJugador: ''
   }
 
   player = {
-    partidaNombre: 'partida1',
-    jugador: 'jugador1'
+    partidaNombre: '',
+    jugador: ''
   }
 
-  
+  play = {
+    partidaNombre: '',
+    jugador: '',
+    jugada: ''
+  }
+
   games = '';
   items = '';
-  items2 = '';
+  items2 = ''; 
+  turno: boolean;
 
   ngOnInit() {
 
-    this.http
-    .get("http://localhost:3000/Partidas")
-    .subscribe((response: any) => {
-      console.log(response.length);
-
-      this.games = response;
-      this.items = response[0].HistorialDejugadas;
-      this.items2 = response[0].nombre;
-    });
   }
 
-  jugar() {
-    
+  jugador() {
+    localStorage.setItem('nombreJugador', JSON.stringify(this.nombreJugador));
+    this._router.navigate(['/game'])
   }
 
 }
