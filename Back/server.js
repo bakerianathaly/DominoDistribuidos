@@ -69,8 +69,7 @@ var PIEZAS2 = {
 };
 
 
-var remotos = ['localhost:3000']
-//var remotos = ['mysterious-refuge-76786.herokuapp.com', 'immense-taiga-70290.herokuapp.com', 'dry-journey-36889.herokuapp.com']
+var computadoras_conectadas = ['localhost:3000']
 
 // var partida = [{
 //      nombre: 'partida1',
@@ -139,15 +138,21 @@ app.post('/Jugada', async (req, res) => {
                               partida[index].turno = partida[index].cantidadJugadores[0];
                               partida[index].turnoDeJugador = partida[index].cantidadJugadores[0];
 
+                         } else if (jugada == 'g') { //esto es para lo de ganar (cuando se bloquee la vaina)
+                              partida[index].ganador = partida[index].turnoDeJugador;
+                              partida[index].estatus = 'finalizada';
                          }
 
                     }
                }
+
           }
      }
 
-     for (let index = 0; index < remotos.length; index++) {
-          let ip = remotos[index];
+
+
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
 
 
           let peticion = {
@@ -197,8 +202,8 @@ app.post('/Unirse', async (req, res) => {
           }
      }
 
-     for (let index = 0; index < remotos.length; index++) {
-          let ip = remotos[index];
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
 
 
           let peticion = {
@@ -228,8 +233,8 @@ app.post('/CrearPartida', async (req, res) => {
      console.log(peticion2)
      partida.push(peticion2);
 
-     for (let index = 0; index < remotos.length; index++) {
-          let ip = remotos[index];
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
 
 
           let peticion = {
@@ -264,8 +269,30 @@ app.post('/turno', async (req, res) => {
           }
      }
 
-});
+     // for (let index = 0; index < computadoras_conectadas.length; index++) {
+     //      let ip = computadoras_conectadas[index];
 
+
+     //      let peticion = {
+     //           method: "POST",
+     //           uri: "http://" + ip + "/Actualizar",
+     //           resolveWithFullResponse: true,
+     //           json: true,
+     //           body: partida
+     //      };
+
+     //      await request(peticion).then(() => {
+
+     //           console.log('ACTUALIZE')
+
+     //      }).catch(function (err) {
+
+     //           console.log('error::: ' + err);
+     //      })
+     // }
+
+
+});
 app.post('/fin', async (req, res) => {
      var partidaNombre = req.body.partidaNombre;
      var ganador = req.body.ganador;
@@ -280,8 +307,8 @@ app.post('/fin', async (req, res) => {
           }
      }
 
-     for (let index = 0; index < remotos.length; index++) {
-          let ip = remotos[index];
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
 
 
           let peticion = {
@@ -307,8 +334,8 @@ app.post('/fin', async (req, res) => {
 
 app.listen(process.env.PORT || 3000, async () => {
 
-     for (let index = 0; index < remotos.length; index++) {
-          let ip = remotos[index];
+     for (let index = 0; index < computadoras_conectadas.length; index++) {
+          let ip = computadoras_conectadas[index];
 
 
           let peticion = {

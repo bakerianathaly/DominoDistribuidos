@@ -6,8 +6,7 @@ import { GamesComponent } from './games/games.component'
 import { TurnoComponent } from './turno/turno.component'
 
 const routes: Routes = [
-  {path:'', component: GameComponent},
-  {path:'game', component:GamesComponent}
+  {path:'', component: GamesComponent}
 ];
 
 @NgModule({
