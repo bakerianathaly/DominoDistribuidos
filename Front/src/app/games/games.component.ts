@@ -12,14 +12,14 @@ import { GameComponent } from '../game/game.component';
 export class GamesComponent implements OnInit {
 
   nombrePartida: string;
-  nombreJugador: string;
+  nombreJugador: string 
   jugada: string;
   turnoJugador: '';
 
   game = {
     nombre: '',
     cantidadJugadores: [],
-    estatus: 'esperando',
+    estatus: 'Esperando',
     ganador: 'N/A',
     fichasJugador1: [],
     fichasJugador2: [],
@@ -30,13 +30,14 @@ export class GamesComponent implements OnInit {
   game2 = {
     nombre: '',
     cantidadJugadores: [],
-    estatus: 'esperando',
+    estatus: 'Esperando',
     ganador: 'N/A',
     fichasJugador1: [],
     fichasJugador2: [],
     HistorialDejugadas: [],
     turnoDeJugador: ''
   }
+  
   player = {
     partidaNombre: '',
     jugador: ''
@@ -62,9 +63,8 @@ export class GamesComponent implements OnInit {
 
     this.nombreJugador = JSON.parse(localStorage.getItem('nombreJugador'));
     this.nombrePartida = JSON.parse(localStorage.getItem('nombrePartida'));
-    //localStorage.removeItem('nombreJugador');
-    //localStorage.removeItem('nombrePartida');
-    interval(20000).subscribe(x => { //70 y 90 actualizar automaticamente
+
+    interval(10000).subscribe(x => { //70 y 90 actualizar automaticamente
       this.games2 = [];
       // this.games = '';
       // this.items = '';
@@ -92,6 +92,8 @@ export class GamesComponent implements OnInit {
   }
 
   CreateGame() {
+    console.log(this.nombreJugador)
+    console.log(this.nombrePartida)
     this.game.nombre = this.nombrePartida;
     this.game.cantidadJugadores = [];
     this.game.cantidadJugadores.push(this.nombreJugador);
@@ -144,5 +146,9 @@ export class GamesComponent implements OnInit {
 
   historial() {
     this.bandera = !this.bandera;
+  }
+
+  jugador(){
+    
   }
 }

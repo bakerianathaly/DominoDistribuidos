@@ -1,21 +1,3 @@
-<body>
-    <div class="text-center container-fluid ">
-        <br><br><br>
-        <h3>Bienvenido al juego de Domino</h3>
-
-        <div class="form-row">
-            <br><br><br>
-            <div class="col-sm-4 my-5">
-            </div>
-            <div class="col-sm-4 my-5">
-                <label>Coloque su nombre para el juego </label>
-                <input class="form-control" type="text" [(ngModel)]="this.nombreJugador" placeholder="Nombre Usuario">
-                <br>
-                <button class="btn btn-warning" (click)="jugador()">Jugar!</button>
-            </div>
-            <div class="col-sm-4 my-5">
-            </div>
-        </div>   
-    </div> 
-    
-</body>
+<div class="container-fluid text-center mt-5">
+    <button class="btn btn-danger" (click)="delete()">Borrar localHost</button>
+</div>

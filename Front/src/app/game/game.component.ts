@@ -43,9 +43,12 @@ export class GameComponent implements OnInit {
 
   }
 
-  jugador() {
-    localStorage.setItem('nombreJugador', JSON.stringify(this.nombreJugador));
-    this._router.navigate(['/game'])
+  delete() {
+    localStorage.removeItem('nombreJugador');
+    localStorage.removeItem('nombrePartida');
+
+    localStorage.clear()
+    this._router.navigate(['/'])
   }
 
 }

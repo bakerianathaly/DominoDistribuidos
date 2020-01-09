@@ -80,17 +80,8 @@ var computadoras_conectadas = ['localhost:3000']
 //      fichasJugador2: [],
 //      HistorialDejugadas: ['jugador 1 ->  0:0', 'jugador 2 -> 0:1'],
 //      turnoDeJugador: ''
-// },
-// {
-//      nombre: 'partida2',
-//      cantidadJugadores: ['jugador1'],
-//      estatus: 'esperando',
-//      ganador: 'N/A',
-//      fichasJugador1: [],
-//      fichasJugador2: [],
-//      HistorialDejugadas: [],
-//      turnoDeJugador: ''
-// }]
+// }
+
 const fs = require('fs');
 var partida = [];
 
@@ -138,9 +129,9 @@ app.post('/Jugada', async (req, res) => {
                               partida[index].turno = partida[index].cantidadJugadores[0];
                               partida[index].turnoDeJugador = partida[index].cantidadJugadores[0];
 
-                         } else if (jugada == 'g') { //esto es para lo de ganar (cuando se bloquee la vaina)
+                         } else if (jugada == 'ganador') { //esto es para lo de ganar (cuando se bloquee la vaina)
                               partida[index].ganador = partida[index].turnoDeJugador;
-                              partida[index].estatus = 'finalizada';
+                              partida[index].estatus = 'Finalizada';
                          }
 
                     }
@@ -191,7 +182,7 @@ app.post('/Unirse', async (req, res) => {
                console.log('--------------------');
                partida[index].nombre = partidaNombre;
                partida[index].cantidadJugadores.push(jugador);
-               partida[index].estatus = 'jugando';
+               partida[index].estatus = 'Jugando';
                partida[index].turnoDeJugador = jugador;
                for (let i = 1; i < 14; i++) {
                     partida[index].fichasJugador1.push(PIEZAS[i]);
@@ -269,30 +260,8 @@ app.post('/turno', async (req, res) => {
           }
      }
 
-     // for (let index = 0; index < computadoras_conectadas.length; index++) {
-     //      let ip = computadoras_conectadas[index];
-
-
-     //      let peticion = {
-     //           method: "POST",
-     //           uri: "http://" + ip + "/Actualizar",
-     //           resolveWithFullResponse: true,
-     //           json: true,
-     //           body: partida
-     //      };
-
-     //      await request(peticion).then(() => {
-
-     //           console.log('ACTUALIZE')
-
-     //      }).catch(function (err) {
-
-     //           console.log('error::: ' + err);
-     //      })
-     // }
-
-
 });
+
 app.post('/fin', async (req, res) => {
      var partidaNombre = req.body.partidaNombre;
      var ganador = req.body.ganador;
@@ -302,8 +271,7 @@ app.post('/fin', async (req, res) => {
           if (partida[index].nombre == partidaNombre) {
 
                partida[index].ganador = ganador;
-               partida[index].estatus = 'finaliazada';
-
+               partida[index].estatus = 'Finalizada';
           }
      }
 
