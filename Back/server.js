@@ -129,7 +129,7 @@ app.post('/Jugada', async (req, res) => {
                               partida[index].turno = partida[index].cantidadJugadores[0];
                               partida[index].turnoDeJugador = partida[index].cantidadJugadores[0];
 
-                         } else if (jugada == 'ganador') { //esto es para lo de ganar (cuando se bloquee la vaina)
+                         } else if (jugada == 'F') { //esto es para lo de ganar (cuando se bloquee la vaina)
                               partida[index].ganador = partida[index].turnoDeJugador;
                               partida[index].estatus = 'Finalizada';
                          }

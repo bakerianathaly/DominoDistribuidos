@@ -15,12 +15,13 @@ export class GamesComponent implements OnInit {
   nombreJugador: string 
   jugada: string;
   turnoJugador: '';
+  habilitarJuego: boolean = false
 
   game = {
     nombre: '',
     cantidadJugadores: [],
     estatus: 'Esperando',
-    ganador: 'N/A',
+    ganador: 'No hay, se esta jugando',
     fichasJugador1: [],
     fichasJugador2: [],
     HistorialDejugadas: [],
@@ -31,7 +32,7 @@ export class GamesComponent implements OnInit {
     nombre: '',
     cantidadJugadores: [],
     estatus: 'Esperando',
-    ganador: 'N/A',
+    ganador: 'No hay, se esta jugando',
     fichasJugador1: [],
     fichasJugador2: [],
     HistorialDejugadas: [],
@@ -149,6 +150,6 @@ export class GamesComponent implements OnInit {
   }
 
   jugador(){
-    
+    this.habilitarJuego = true
   }
 }

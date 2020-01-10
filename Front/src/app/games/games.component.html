@@ -1,18 +1,28 @@
 <div id="fondo"> 
   <div class="container-fluid ">
-    <label class="mt-5">Nombre de Usuario:
-      <input [(ngModel)]="this.nombreJugador" placeholder="Nombre Usuario">
-    </label>
+    <!-- <label class="mt-5 inLine">Nombre de Jugador:
+      <input class="form-control inLine" [(ngModel)]="this.nombreJugador" placeholder="Nombre Jugador">
+    </label> -->
+    <br><br>
+    <div class="form-group row " *ngIf="!this.habilitarJuego">
+      <label class=" col-form-label ml-5 ">Nombre del Jugador</label>
+      <div class="ml-3 mr-3">
+        <input class="form-control " [(ngModel)]="this.nombreJugador" placeholder="Nombre del Jugador">
+      </div>
+      <button class="btn btn-dark " (click)="jugador()">Iniciar</button>
+    </div>
 
-    <h3 class="text-center mt-5">Bienvenido, {{ this.nombreJugador }}</h3>
+    <h3 class="text-center mt-5">Bienvenido {{ this.nombreJugador }}</h3>
     <br>
-    <div class="row mt-4">
+
+    <div class="row mt-4" *ngIf="this.habilitarJuego">
+      <!-- Div en donde se ven los movimientos -->
       <div class="col-md-8">
         <div class=row>
           <div class="col-md-6" *ngFor="let game of games2">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>Movimientos {{game.nombre}}</mat-card-title>
+                <mat-card-title>Estas en la partida: {{game.nombre}}</mat-card-title>
               </mat-card-header>
               <ol>
                 <li *ngFor="let item of game.HistorialDejugadas">
@@ -31,25 +41,24 @@
                 <ng-template #jugador2>
                   <p>{{ this.game.fichasJugador2 }}</p>
                 </ng-template>
-
+                <div class="col-md-4">
+                  <div *ngIf="this.game.turnoDeJugador == this.nombreJugador">
+                    <i class="fas fa-bell"></i>
+                    <h5 style="color: red;">Es tu turno!</h5>
+                  </div>
+                </div>
               </mat-card-content>
             </mat-card>
             <br>
-            <div class="col-md-4">
-              <div *ngIf="this.game.turnoDeJugador == this.nombreJugador">
-                <i class="fas fa-bell"></i>
-                Es tu turno
-                <hr>
-              </div>
-
-            </div>
+            
           </div>
         </div>
-        <input [(ngModel)]="this.jugada" type="text"><button type="submit" (click)="jugar()" class="boton">Jugar</button>
-
       </div>
 
-      <div class="col-md-4">
+      <!-- Div que contiene los cards de la derecha -->
+      <div class="col-md-4 text-center">
+
+        <!-- Card de todas las partidas activas -->
         <mat-card class="example-card">
           <mat-card-header>
             <mat-card-title>Tablero de partidas</mat-card-title>
@@ -58,42 +67,56 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>
-                    Partida
-                  </th>
-                  <th>
-                    Cantidad Jugadores
-                  </th>
-                  <th>
-                    Status
-                  </th>
-                  <th>
-                    Ganador
-                  </th>
+                  <th>Partida</th>
+                  <th>Jugadores</th>
+                  <th>Estatus</th>
+                  <th>Ganador</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let game of games">
                   <td>{{game.nombre}}</td>
-                  <td style="text-align: center; ">{{game.cantidadJugadores.length}}</td>
+                  <td style="text-align: center; ">{{game.cantidadJugadores}}</td>
                   <td>{{game.estatus}}</td>
                   <td style="text-align: center; ">{{game.ganador}}</td>
                 </tr>
               </tbody>
             </table>
           </mat-card-content>
-          <button mat-button class="boton-derecha" (click)="JoinGame()">Unirme a Partida</button>
-          <button mat-button class="boton-derecha" (click)="historial()">Historial de Partidas</button>
+          <button mat-button class="btn btn-info" (click)="historial()">Historial de Partidas</button>
         </mat-card>
         <br>
-        <label>Nombre de la partida:
-          <input [(ngModel)]="this.nombrePartida" placeholder="Nombre de la partida">
-        </label>
-        <hr>
-        <button mat-button class="boton" (click)="CreateGame()">Crear Partida</button>
+
+        <!-- Card de las partidas, unirse, crear y jugar -->
+        <mat-card class="example-card mb-5">
+            <mat-card-header>
+              <mat-card-title>Crear, Unir o Jugar en las Partidas!</mat-card-title>
+            </mat-card-header>
+            <hr>
+            <mat-card-content>
+              <div class="form-group row">
+                <label for="partida" class="col-sm-3 col-form-label">Tu Partida!</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="partida" [(ngModel)]="this.nombrePartida" placeholder="Nombre de la partida">
+                </div>
+              </div>
+
+              <div class="form-group row mt-2">
+                <div class="col-sm-10">
+                  <input class="form-control" [(ngModel)]="this.jugada" type="text" placeholder="Jugada del nombre de partida de arriba">
+                </div>
+                <button type="submit" (click)="jugar()" class="btn btn-danger ml-2">Jugar</button>
+              </div>
+
+              <button mat-button class="btn btn-primary mr-3" (click)="CreateGame()">Crear Partida</button>
+              <button mat-button class="btn btn-warning" (click)="JoinGame()">Unirme a Partida</button>
+            </mat-card-content>
+
+        </mat-card>
       </div>
     </div>
 
+    <!-- Div del card del historial SI le dan al boton -->
     <div *ngIf="!bandera">
       <div class=row>
         <div class="col-md-6" *ngFor="let game of games2">
