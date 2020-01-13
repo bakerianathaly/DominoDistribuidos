@@ -1,5 +1,7 @@
 # DominoDistribuidos
 
+[{"nombre":"prueba1","cantidadJugadores":["nath","kiddo"],"estatus":"Finalizada","ganador":"nath","fichasJugador1":["","0:1","0:2","0:3","0:4","0:5","0:6","1:1","1:2","1:3","1:4","","1:6"],"fichasJugador2":["","","2:4","2:5","2:6","3:3","3:4","3:5","3:6","4:4","4:5","4:6","5:5","5:6"],"HistorialDejugadas":["nath --> 2:2","kiddo --> 0:0","nath --> 2:3","kiddo --> 1:5"],"turnoDeJugador":"nath","turno":"nath"},{"nombre":"auida","cantidadJugadores":["carmen","saris"],"estatus":"Jugando","ganador":"No hay, se esta jugando","fichasJugador1":["0:0","0:1","","0:3","0:4","0:5","0:6","1:1","1:2","1:3","1:4","1:5","1:6"],"fichasJugador2":["","","2:4","2:5","2:6","3:3","3:4","3:5","3:6","4:4","4:5","4:6","5:5","5:6"],"HistorialDejugadas":["saris --> 2:2","carmen --> 0:2","saris --> 2:3"],"turnoDeJugador":"carmen","turno":"carmen"}]
+
 Rutas explicadas
 
 GET /game: Lo que hace es regresar el arreglo de JSON que contiene las dos partidas que se pueden crear 

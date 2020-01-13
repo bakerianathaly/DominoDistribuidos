@@ -36,15 +36,14 @@
               <mat-card-content>
                 <mat-card-title>Tus fichas:</mat-card-title>
                 <br>
-                <p *ngIf="this.nombreJugador == this.game.cantidadJugadores[0]; else  jugador2">
-                  {{ this.game.fichasJugador1 }}</p>
+                <h6 *ngIf="this.nombreJugador == this.game.cantidadJugadores[0]; else  jugador2">{{ this.game.fichasJugador1 }}</h6>
                 <ng-template #jugador2>
-                  <p>{{ this.game.fichasJugador2 }}</p>
+                  <h6>{{ this.game.fichasJugador2 }}</h6>
                 </ng-template>
                 <div class="col-md-4">
                   <div *ngIf="this.game.turnoDeJugador == this.nombreJugador">
-                    <i class="fas fa-bell"></i>
-                    <h5 style="color: red;">Es tu turno!</h5>
+                    <br>
+                    <h5 *ngIf="this.ganador != null" style="color: red;">Es tu turno! <img src="/Front/src/assets/Unknown.png"></h5>
                   </div>
                 </div>
               </mat-card-content>
@@ -122,7 +121,7 @@
         <div class="col-md-6" *ngFor="let game of games2">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>Historial de {{game.nombre}}</mat-card-title>
+              <mat-card-title>Historial de la partida: {{game.nombre}}</mat-card-title>
             </mat-card-header>
             <ol>
               <li *ngFor="let item of game.HistorialDejugadas">
@@ -131,18 +130,18 @@
             </ol>
             <br>
             <h3>Ganador</h3>
-            <p>{{this.game.ganador}}</p>
+            <h6>{{this.game.ganador}}</h6>
             <br>
             <h3>Estado</h3>
-            <p>{{this.game.estatus}}</p>
+            <h6>{{this.game.estatus}}</h6>
             <br>
             <mat-card-content>
-              <mat-card-title>fichas no jugadas:</mat-card-title>
+              <mat-card-title>Fichas restantes:</mat-card-title>
               <br>
-              <p>Jugador 1:</p>
-              <p>{{ this.game.fichasJugador1 }}</p>
-              <p>Jugador 2:</p>
-              <p>{{ this.game.fichasJugador2 }}</p>
+              <h5>Jugador 1:</h5>
+              <h6>{{ this.game.fichasJugador1 }}</h6>
+              <h5>Jugador 2:</h5>
+              <h6>{{ this.game.fichasJugador2 }}</h6>
             </mat-card-content>
           </mat-card>
           <br>
