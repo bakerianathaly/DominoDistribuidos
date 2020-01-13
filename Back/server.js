@@ -69,7 +69,7 @@ var PIEZAS2 = {
 };
 
 
-var computadoras_conectadas = ['localhost:3000']
+var computadoras_conectadas = ['localhost:3000','192.168.1.101:3001','192.168.1.102:3002']
 //, '192.168.1.9:3001']
 
 // var partida = [{
